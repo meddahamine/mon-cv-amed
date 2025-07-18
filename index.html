@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed - Ingénieur FullStack/DevOps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cv-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2c3e50);
+            border-radius: 2px;
+        }
+
+        .experience-item, .education-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover, .education-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .company {
+            color: #3498db;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border-top: 4px solid #3498db;
+        }
+
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .certifications {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .cert-item {
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .cert-item:last-child {
+            border-bottom: none;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .name {
+                font-size: 2em;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .languages {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .language-level {
+            background: #27ae60;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cv-card">
+            <div class="header">
+                <div class="profile-img">A</div>
+                <h1 class="name">Ahmed BENALI</h1>
+                <p class="title">Ingénieur FullStack / DevOps</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span>ahmed.benali@email.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📱</span>
+                        <span>+33 6 12 34 56 78</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>Paris, France</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🔗</span>
+                        <span>linkedin.com/in/ahmed-benali</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="left-column">
+                    <section class="section">
+                        <h2>Expérience Professionnelle</h2>
+                        
+                        <div class="experience-item">
+                            <div class="job-title">Lead DevOps Engineer</div>
+                            <div class="company">TechCorp Solutions</div>
+                            <div class="date">2022 - Présent</div>
+                            <ul>
+                                <li>Architecture et déploiement d'infrastructures cloud (AWS, Azure)</li>
+                                <li>Mise en place de pipelines CI/CD avec GitLab CI et Jenkins</li>
+                                <li>Containerisation avec Docker et orchestration Kubernetes</li>
+                                <li>Monitoring et observabilité avec Prometheus et Grafana</li>
+                            </ul>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="job-title">Ingénieur FullStack</div>
+                            <div class="company">StartupTech</div>
+                            <div class="date">2020 - 2022</div>
+                            <ul>
+                                <li>Développement d'applications web avec React.js et Node.js</li>
+                                <li>Conception et implémentation d'APIs RESTful</li>
+                                <li>Gestion de bases de données PostgreSQL et MongoDB</li>
+                                <li>Automatisation des tests avec Jest et Cypress</li>
+                            </ul>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="job-title">Développeur Backend</div>
+                            <div class="company">WebServices Inc.</div>
+                            <div class="date">2018 - 2020</div>
+                            <ul>
+                                <li>Développement de microservices avec Spring Boot</li>
+                                <li>Intégration de services tiers et APIs externes</li>
+                                <li>Optimisation des performances et scalabilité</li>
+                                <li>Collaboration en équipe agile (Scrum)</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="section">
+                        <h2>Formation</h2>
+                        
+                        <div class="education-item">
+                            <div class="job-title">Master en Informatique</div>
+                            <div class="company">École Polytechnique</div>
+                            <div class="date">2016 - 2018</div>
+                            <p>Spécialisation en Systèmes Distribués et Cloud Computing</p>
+                        </div>
+
+                        <div class="education-item">
+                            <div class="job-title">Licence en Informatique</div>
+                            <div class="company">Université Paris-Saclay</div>
+                            <div class="date">2013 - 2016</div>
+                            <p>Programmation, Algorithmique, Bases de données</p>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="right-column">
+                    <section class="section">
+                        <h2>Compétences Techniques</h2>
+                        
+                        <div class="skills-grid">
+                            <div class="skill-category">
+                                <h3>Frontend</h3>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">React.js</span>
+                                    <span class="skill-tag">Vue.js</span>
+                                    <span class="skill-tag">TypeScript</span>
+                                    <span class="skill-tag">HTML5/CSS3</span>
+                                    <span class="skill-tag">Sass</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h3>Backend</h3>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">Node.js</span>
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">Java</span>
+                                    <span class="skill-tag">Go</span>
+                                    <span class="skill-tag">Express.js</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h3>DevOps & Cloud</h3>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">AWS</span>
+                                    <span class="skill-tag">Docker</span>
+                                    <span class="skill-tag">Kubernetes</span>
+                                    <span class="skill-tag">Terraform</span>
+                                    <span class="skill-tag">GitLab CI</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h3>Bases de Données</h3>
+                                <div class="skill-tags">
+                                    <span class="skill-tag">PostgreSQL</span>
+                                    <span class="skill-tag">MongoDB</span>
+                                    <span class="skill-tag">Redis</span>
+                                    <span class="skill-tag">Elasticsearch</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="section">
+                        <h2>Certifications</h2>
+                        <div class="certifications">
+                            <div class="cert-item">
+                                <strong>AWS Solutions Architect Associate</strong> - 2023
+                            </div>
+                            <div class="cert-item">
+                                <strong>Certified Kubernetes Administrator (CKA)</strong> - 2022
+                            </div>
+                            <div class="cert-item">
+                                <strong>Docker Certified Associate</strong> - 2021
+                            </div>
+                            <div class="cert-item">
+                                <strong>Scrum Master Certified</strong> - 2020
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="section">
+                        <h2>Langues</h2>
+                        <div class="languages">
+                            <div class="language-item">
+                                <span>Français</span>
+                                <span class="language-level">Natif</span>
+                            </div>
+                            <div class="language-item">
+                                <span>Anglais</span>
+                                <span class="language-level">Courant</span>
+                            </div>
+                            <div class="language-item">
+                                <span>Arabe</span>
+                                <span class="language-level">Courant</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="section">
+                        <h2>Projets Notables</h2>
+                        <div class="experience-item">
+                            <div class="job-title">Plateforme E-commerce</div>
+                            <p>Architecture microservices complète avec React, Node.js, et déploiement sur AWS avec Kubernetes.</p>
+                        </div>
+                        <div class="experience-item">
+                            <div class="job-title">Pipeline CI/CD</div>
+                            <p>Automatisation complète du déploiement avec tests, sécurité et monitoring intégrés.</p>
+                        </div>
+                    </section>
+
+                    <button class="download-btn" onclick="window.print()">
+                        📄 Télécharger en PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animation d'apparition progressive des éléments
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observer tous les éléments avec animation
+        document.querySelectorAll('.experience-item, .education-item, .skill-category, .certifications, .languages').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Effet de parallaxe sur le header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+  </html>
